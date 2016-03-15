@@ -50,5 +50,4 @@ int main(int argc, char **argv) {
   t2 = now();
 
   std::cout << "A single multiplication took " << std::fixed << std::setprecision(4) << (t2 - t1) / n_iterations << " seconds." << std::endl;
-
 }
