@@ -14,7 +14,7 @@ double now() {
 #define DIMENSION 512
 
 // toggle what "int" means
-//#define int std::atomic<int>
+#define int std::atomic<int>
 
 int first[DIMENSION][DIMENSION], second[DIMENSION][DIMENSION], multiply[DIMENSION][DIMENSION];
 
@@ -39,8 +39,12 @@ int main(int argc, char **argv) {
   const int n_iterations = 10;
   double t1, t2;
 
+  std::cout << "Single matrix in-memory size: " << sizeof(first) << " bytes (" << sizeof(first) / 1024 << " KiB)." << std::endl;
+
   for (int i = 0; i < n_iterations; i++)
     matrixmult();
+
+  std::cout << "Done warmup." << std::endl;
 
   t1 = now();
 

@@ -17,13 +17,13 @@ A store with atomic types (`std::atomic<int> y`) looks like this:
 	movl	$777, %eax
 	xchgl	12(%esp), %eax
 
-So, it uses `xchgl`, which is [documented](http://www.fermimn.gov.it/linux/quarta/x86/xchg.htm) to behave "if a memory operand is involved, BUS LOCK is asserted for the duration of the exchange". A bus lock, [Intel says](http://www.cs.cmu.edu/~410-f10/doc/Intel_Reordering_318147.pdf) in the context of "Intel 64 memory ordering", means "In a multiprocessor system, locked instructions have a total order," where the wording "total order" means the pipelines are blown and caches are committed immediately. It acts as a memory fence.
+So, it uses `xchgl`, which is [documented](http://www.fermimn.gov.it/linux/quarta/x86/xchg.htm) to behave "if a memory operand is involved, BUS LOCK is asserted for the duration of the exchange". A bus lock, [Intel says](http://www.cs.cmu.edu/~410-f10/doc/Intel_Reordering_318147.pdf) in the context of "Intel 64 memory ordering", means "In a multiprocessor system, locked instructions have a total order," where the wording "total order" means the pipelines are blown and caches are committed immediately. It acts as a memory fence (note that by itself, the word "atomic" does not imply a memory fence!)
 
 Now, this is on x86, so the compiler will not do anything special for reads, but that's ok. I think this is a fair test of the theory at hand. So, I'm going to find some code and test how it behaves with the two variants.
 
 ## The benchmark
 
-I've chosen square matrix multiplication code with 1 MB matrices (i.e. 3 of them are involved in the operation). The main part of the algorithm is this loop:
+I've chosen square matrix multiplication code with 1 MB matrices (i.e. 3 of those are involved in the operation). The main part of the algorithm is this loop:
 
 	for (c = 0; c < m; c++) {
 	  for (d = 0; d < q; d++) {
