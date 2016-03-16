@@ -39,7 +39,7 @@ All the variables here are `int`'s, and I will compile the code once, regularly,
 
 ## The result
 
-I'm running the test on my [Broadwell-U](http://ark.intel.com/products/85212/Intel-Core-i5-5200U-Processor-3M-Cache-up-to-2_70-GHz) laptop. I've taken into account CPU frequency scaling by having a warm-up run of 10 seconds so the frequency has enough time to ramp up.
+I'm running the test on my [Broadwell-U](http://ark.intel.com/products/85212/Intel-Core-i5-5200U-Processor-3M-Cache-up-to-2_70-GHz) laptop. I've taken into account CPU frequency scaling by having a warm-up run so the frequency has enough time to ramp up.
 
 **The "plain int" version took 0.33 seconds for a single multiplication.**
 
